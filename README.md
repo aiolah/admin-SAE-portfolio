@@ -1,4 +1,4 @@
-Ce site web est une interface administrateur. Elle permet aux administrateurs de l'application Castres au trésor d'ajouter, de modifier et de supprimer des lieux.
+Ce site web est une interface d'administration. Elle permet aux administrateurs de l'application Castres au trésor d'ajouter, de modifier et de supprimer des lieux.
 
 Les technologies utilisées sont NodeJS, Bootstrap et CouchDB.
 
