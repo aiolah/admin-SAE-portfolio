@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des lieux</title>
+    <link rel="icon" type="image/x-icon" href="https://webmmi.iut-tlse3.fr/~clc4232a/S5/SAE501/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+
+        .imageLieu {
+            flex-grow: 1;
+            object-fit: cover;
+            min-height: 15vh;
+            max-height: 15vh;
+        }
+  
+        @media only screen and (max-width: 992px)
+        {
+            .card-group {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+    </style>
+
+    <script type="module" src="../scripts/firebase.js"></script>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <h1 class="my-4">Liste des lieux</h1>
+
+            <!-- Si la variable status existe, alors on l'initialise avec sa valeur. Sinon on l'initialise à false -->
+            <% var status = status || false; %>
+            <% var type = type || ""; %>
+            <% if(status && type == "ajout") { %>
+                <div class="alert alert-success my-5" role="alert">
+                    Ajout réalisé avec succès !
+                </div>
+            <% } else if(status && type == "modification") { %>
+                <div class="alert alert-success my-5" role="alert">
+                    Modification réalisée avec succès !
+                </div>
+            <% } else if(status && type == "suppression") { %>
+                <div class="alert alert-success my-5" role="alert">
+                    Suppression réalisée avec succès !
+                </div>
+            <% } else if(status == "false") { %>
+                <div class="alert alert-danger my-5" role="alert">
+                    Erreur lors de la suppression
+                </div>
+            <% } %>
+
+            <div class="my-4">
+                <a href="/ajout-lieu" class="btn btn-primary">Créer un nouveau lieu</a>
+            </div>
+
+            <!-- <div class="card-group d-flex flex-sm-column flex-md-row align-items-sm-center align-items-start justify-content-md-center"> -->
+            <div class="card-group">
+                <% lieux.forEach(function(lieu) { %>
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://webmmi.iut-tlse3.fr/~clc4232a/S5/SAE501/<%= lieu.imageUrl %>" class="card-img-top imageLieu" alt="<%= lieu.nomLieu %>">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= lieu.nomLieu %></h5>
+                            <p class="card-text"><%= lieu.descriptionMystere %></p>
+                            <a href="/form-modifier-lieu/<%= lieu.idLieu %>" class="btn btn-primary" title="Modifier">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="/supprimer-lieu/<%= lieu.idLieu %>" class="btn btn-danger delete" id="<%= lieu.idLieu %>">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-secondary my-4" id="deconnexion">Se déconnecter</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
+
+<script>
+
+    let deleteButtons = document.querySelectorAll(".delete");
+    deleteButtons.forEach((button) => {
+        if(parseInt(button.id) <= 11)
+        {
+            button.classList.add("disabled");
+            button.href = "";
+        }
+    });
+
+</script>
