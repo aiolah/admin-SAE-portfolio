@@ -6,5 +6,5 @@ URL du site : https://aiolah.alwaysdata.net.
 
 Identifiants de l'interface :
 
-- Email : castres-au-tresor@gmail.com<br>
+- Email : castres-au-tresor@yopmail.com<br>
 - Mot de passe : Jeveuxvoirlesite2024!
